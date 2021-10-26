@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">BOOKIFY</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav navbar-right ">
+        <% if user_signed_in? %>
+          <% if current_user.role_id == 1 || current_user.role_id == 2  %>
+          <li class="nav-item">
+            <%= link_to 'Add Books', new_book_path , class: 'nav-link' %>
+          </li>
+            <% end %>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Categories </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.all.each do |category| %>
+                <li class="<%= 'active' if params[:category] == category.name %>" >
+                     <%= link_to category.name, books_path(category: category.name), class: "link" %>
+                </li>
+              <%end %>
+              <li><%= link_to "All Categories",books_path %></li>
+
+              <% if current_user.role_id == 1  %>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to "Add Category",new_category_path(@category) %></li>
+
+            <%end %>
+
+            </ul>
+
+          </li>
+
+          <% if current_user.role_id == 1  %>
+          <li class="nav-item">
+            <%= link_to 'Users', users_path, class: 'nav-link' %>
+          </li>
+            <% end %>
+
+          <li class="nav-item">
+            <%= link_to 'Sign out', destroy_user_session_path ,method: :delete, class: 'nav-link' %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'Edit account', edit_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%#= image_tag(current_user.user_image_thumbnail)  %>
+            <%= image_tag url_for(current_user.user_image_thumbnail), class: "show-user"%>
+          </li>
+
+
+        <% else %>
+
+          <li class="nav-item">
+            <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+          </li>
+
+        <% end %>
+
+      </ul>
+    </div>
+  </div>
+</nav>

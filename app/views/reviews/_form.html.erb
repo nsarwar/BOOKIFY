@@ -1,0 +1,14 @@
+<%= simple_form_for( [@book , @book.reviews.build]) do |f| %>
+
+<div id="rating-form">
+  <%= f.input :rating, label: "Rating" %>
+</div>
+
+
+  <%= f.input :comment, label: "comment" %>
+  <%= f.button :submit,:class => "btn-custom2" %>
+  <%= link_to "Back" ,books_path , class: "btn btn-custom2" %>
+
+<% end %>
+
+

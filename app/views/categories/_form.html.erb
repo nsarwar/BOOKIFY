@@ -1,0 +1,14 @@
+<% if current_user.role_id == 1  %>
+  <%= simple_form_for @category do |f| %>
+
+
+    <%= f.input :name, label: "Category Name" %>
+    <%= f.button :submit,:class => "btn-custom2" %>
+  <% end %>
+<% end %>
+
+<br>
+<div class="links btn-group">
+  <%= link_to "Back" ,books_path, class: "btn btn-custom2"%>
+</div>
+<!--<a class="btn btn-primary" href="books_path" role="button">Link</a>-->

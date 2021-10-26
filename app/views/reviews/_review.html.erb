@@ -1,0 +1,18 @@
+<div class="review">
+     <div>
+        <% (1 .. review.rating).each do %>
+           <%= image_tag '/assets/star-on.png' %>
+        <% end %>
+     </div>
+     <p class="review-comment">
+       <%= review.comment %>
+     </p>
+
+    <% if current_user.role_id == 1 || current_user.role_id == 2  %>
+        <div class="links btn-group">
+           <%= link_to "Edit Review", edit_book_review_path(review.book,review) , class: "btn btn-custom"%>
+           <%= link_to "Delete Review", book_review_path(review.book,review),method: :delete , data: { confirm: "Are you sure?"} ,class: "btn btn-custom"%>
+        </div>
+    <% end %>
+
+</div>
